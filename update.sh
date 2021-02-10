@@ -28,7 +28,7 @@ elif [[ ${1} == "screenshot" ]]; then
     docker run --rm --network host --entrypoint="" -u "$(id -u "$USER")" -v "${GITHUB_WORKSPACE}":/usr/src/app/src zenika/alpine-chrome:with-puppeteer node src/puppeteer.js
     exit 0
 else
-    version=$(curl -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -fsSL "https://api.github.com/repos/archmonger/conreq/commits/main" | jq -r .sha)
+    version=$(curl -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -fsSL "https://api.github.com/repos/archmonger/conreq/commits/develop" | jq -r .sha)
     [[ -z ${version} ]] && exit 1
     req_sha1=$(curl -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -fsSL "https://raw.githubusercontent.com/archmonger/conreq/${version}/requirements.txt" | sha1sum | awk '{print $1}')
     [[ -z ${req_sha1} ]] && exit 1
