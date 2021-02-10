@@ -30,8 +30,13 @@ elif [[ ${1} == "screenshot" ]]; then
 else
     version=$(curl -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -fsSL "https://api.github.com/repos/archmonger/conreq/commits/main" | jq -r .sha)
     [[ -z ${version} ]] && exit 1
+    req_sha1=$(curl -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -fsSL "https://raw.githubusercontent.com/Archmonger/Conreq/main/requirements.txt" | sha1sum | awk '{print $1}')
+    [[ -z ${req_sha1} ]] && exit 1
     old_version=$(jq -r '.version' < VERSION.json)
     changelog=$(jq -r '.changelog' < VERSION.json)
     [[ "${old_version}" != "${version}" ]] && changelog="https://github.com/archmonger/conreq/compare/${old_version}...${version}"
-    echo '{"version":"'"${version}"'","changelog":"'"${changelog}"'"}' | jq . > VERSION.json
+    old_req_sha1=$(jq -r '.req_sha1' < VERSION.json)
+    req_version=$(jq -r '.req_version' < VERSION.json)
+    [[ "${old_req_sha1}" != "${req_sha1}" ]] && req_version=${version}
+    echo '{"version":"'"${version}"'","req_sha1":"'"${req_sha1}"'","req_version":"'"${req_version}"'","changelog":"'"${changelog}"'"}' | jq . > VERSION.json
 fi
