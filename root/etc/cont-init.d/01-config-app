@@ -3,8 +3,8 @@
 
 umask "${UMASK}"
 
-DATA_DIR="${CONFIG_DIR}/app" && export DATA_DIR
-DEBUG="False"                && export DEBUG
+DATA_DIR="${CONFIG_DIR}" && export DATA_DIR
+DEBUG="False"            && export DEBUG
 
 cd "${APP_DIR}" || exit 1
 
@@ -12,7 +12,7 @@ python3 ./manage.py migrate --noinput
 python3 ./manage.py collectstatic --link --noinput
 python3 ./manage.py compress
 
-chown -R hotio:hotio "${CONFIG_DIR}/app"
+chown -R hotio:hotio "${CONFIG_DIR}"
 
 # shellcheck disable=SC2086
 s6-setuidgid hotio python3 ./manage.py run_huey --quiet &

@@ -3,8 +3,8 @@
 
 umask "${UMASK}"
 
-DATA_DIR="${CONFIG_DIR}/app" && export DATA_DIR
-DEBUG="False"                && export DEBUG
+DATA_DIR="${CONFIG_DIR}" && export DATA_DIR
+DEBUG="False"            && export DEBUG
 
 DAPHNE_PARAMS="-b 0.0.0.0"
 if [[ "${SSL}" == true ]] && [[ -f "${SSL_CERT}" ]] && [[ -f "${SSL_KEY}" ]]; then
@@ -18,4 +18,4 @@ fi
 cd "${APP_DIR}" || exit 1
 
 # shellcheck disable=SC2086
-exec s6-setuidgid hotio daphne ${DAPHNE_PARAMS} conreq.asgi:application --access-log "${CONFIG_DIR}/app/logs/access.log"
+exec s6-setuidgid hotio daphne ${DAPHNE_PARAMS} conreq.asgi:application --access-log "${CONFIG_DIR}/logs/access.log"
