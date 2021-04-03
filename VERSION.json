@@ -1,6 +1,6 @@
 {
-  "version": "9414a39e2ef65fd72f1b5bbf57510e29110de1ea",
-  "req_sha1": "503c17d86c867c4c330e20a586f1bf8a6f76af4f",
-  "req_version": "59e3ab5e7fbddd74190a105432f527f09991e9d7",
-  "changelog": "https://github.com/archmonger/conreq/compare/99b755cd949abdbf41895236f661d612c62609df...9414a39e2ef65fd72f1b5bbf57510e29110de1ea"
+  "version": "95723ff875fcff3007771f361d7a02222a659e85",
+  "req_sha1": "b8cf0bc8089d8ce11647eac1aefed9257eb89ca5",
+  "req_version": "95723ff875fcff3007771f361d7a02222a659e85",
+  "changelog": "https://github.com/archmonger/conreq/compare/9414a39e2ef65fd72f1b5bbf57510e29110de1ea...95723ff875fcff3007771f361d7a02222a659e85"
 }
