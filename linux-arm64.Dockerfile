@@ -8,6 +8,7 @@ RUN apk add --no-cache python3 py3-pip sqlite-libs libstdc++ freetype libjpeg-tu
 
 ARG REQ_VERSION
 RUN apk add --no-cache --virtual=build-dependencies \
+    bsd-compat-headers \
     freetype-dev \
     libjpeg-turbo-dev \
     lcms2-dev \
