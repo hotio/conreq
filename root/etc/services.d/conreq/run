@@ -9,4 +9,4 @@ DEBUG="False"            && export DEBUG
 cd "${APP_DIR}" || exit 1
 
 # shellcheck disable=SC2086
-exec s6-setuidgid hotio hypercorn --bind 0.0.0.0:8000 --access-logfile "${CONFIG_DIR}/logs/access.log" --websocket-ping-interval 20 --workers $(nproc) ${ARGS} conreq.asgi:application
+exec s6-setuidgid hotio hypercorn --bind 0.0.0.0:8000 --access-logfile "${CONFIG_DIR}/logs/access.log" --websocket-ping-interval 20 --workers "$(nproc)" ${ARGS} conreq.asgi:application
