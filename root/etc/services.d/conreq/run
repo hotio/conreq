@@ -6,16 +6,7 @@ umask "${UMASK}"
 DATA_DIR="${CONFIG_DIR}" && export DATA_DIR
 DEBUG="False"            && export DEBUG
 
-DAPHNE_PARAMS="-b 0.0.0.0"
-if [[ "${SSL}" == true ]] && [[ -f "${SSL_CERT}" ]] && [[ -f "${SSL_KEY}" ]]; then
-    DAPHNE_PARAMS="-e ssl:8000:privateKey=${SSL_KEY}:certKey=${SSL_CERT}"
-
-elif [[ "${SSL}" == true ]]; then
-    [[ ! -f "${SSL_CERT}" ]] && echo "Not starting with SSL. Could not find the certificate \"${SSL_CERT}\"."
-    [[ ! -f "${SSL_KEY}" ]] && echo "Not starting with SSL. Could not find the key \"${SSL_KEY}\"."
-fi
-
 cd "${APP_DIR}" || exit 1
 
 # shellcheck disable=SC2086
-exec s6-setuidgid hotio daphne ${DAPHNE_PARAMS} conreq.asgi:application --access-log "${CONFIG_DIR}/logs/access.log"
+exec s6-setuidgid hotio hypercorn --bind 0.0.0.0:8000 --access-logfile "${CONFIG_DIR}/logs/access.log" --websocket-ping-interval 20 --workers "$(nproc)" ${ARGS} conreq.asgi:application
