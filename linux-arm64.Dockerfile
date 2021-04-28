@@ -18,7 +18,8 @@ RUN apk add --no-cache --virtual=build-dependencies \
     libffi-dev \
     openssl-dev \
     build-base \
-    python3-dev && \
+    python3-dev \
+    mariadb-dev && \
     curl -fsSL "https://raw.githubusercontent.com/archmonger/conreq/${REQ_VERSION}/requirements.txt" > "${APP_DIR}/requirements.txt" && \
     pip3 install --no-cache-dir --upgrade -r "${APP_DIR}/requirements.txt" && \
     apk del --purge build-dependencies
