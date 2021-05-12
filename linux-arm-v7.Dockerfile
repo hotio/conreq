@@ -1,5 +1,7 @@
 FROM ghcr.io/hotio/base@sha256:6fa9179cf9aa06dd0d03645fb5920bf2fa7edf73e3505f34b59ecfcf7340a2c6
 
+ENV DEBUG="False"
+
 EXPOSE 8000
 
 ARG CRYPTOGRAPHY_DONT_BUILD_RUST=true
