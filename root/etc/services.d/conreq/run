@@ -4,7 +4,6 @@
 umask "${UMASK}"
 
 DATA_DIR="${CONFIG_DIR}" && export DATA_DIR
-DEBUG="False"            && export DEBUG
 
 DAPHNE_PARAMS="-b 0.0.0.0"
 if [[ "${SSL}" == true ]] && [[ -f "${SSL_CERT}" ]] && [[ -f "${SSL_KEY}" ]]; then
